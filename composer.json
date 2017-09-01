@@ -1,0 +1,24 @@
+{
+    "config": {
+        "vendor-dir": "./vendor/"
+    },
+    "repositories": [
+        {"type": "composer", "url": "https://packagist.phpcomposer.com"},
+        {"packagist": false}
+    ],
+    "require": {
+        "php": ">=5.3.28",
+        "evenement/evenement" : "1.0.0",
+        "rmccue/requests" : "1.6.1",
+        "analog/analog": "1.0.6-stable",
+        "pda/pheanstalk": "3.0.2",
+        "league/monga": "1.1.0",
+        "qiniu/php-sdk": "7.0.0",
+        "endroid/qrcode": "1.5.0",
+        "phpoffice/phpexcel": "1.8.0",
+        "phpmailer/phpmailer":"5.2.9",
+        "jpush/jpush": "3.5.*",
+        "mongodb/mongodb": "1.1.2",
+        "nategood/httpful":"*"
+    }
+}

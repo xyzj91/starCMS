@@ -1,0 +1,12 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine on
+
+    RewriteRule ([a-zA-Z0-9\_\-]{1,})/([a-zA-Z0-9\_\-]{1,})/([a-zA-Z0-9\_\-]{1,})$ index.php?m=$1&c=$2&a=$3 [NC,QSA]
+	RewriteRule ([a-zA-Z0-9\_-]{1,})/([a-zA-Z0-9\_-]{1,})/([a-zA-Z0-9\_-]{1,})/$ index.php?m=$1&c=$2&a=$3 [NC,QSA]
+	RewriteRule ([a-zA-Z0-9\_-]{1,})/([a-zA-Z0-9\_-]{1,})/([a-zA-Z0-9\_-]{1,}).html$ index.php?m=$1&c=$2&a=$3 [NC,QSA]
+	RewriteRule ([a-zA-Z0-9\_\-]{1,})/([a-zA-Z0-9\_\-]{1,})$ index.php?m=$1&c=$2 [NC,QSA]
+	RewriteRule ([a-zA-Z0-9\_\-]{1,})/([a-zA-Z0-9\_\-]{1,})/$ index.php?m=$1&c=$2 [NC,QSA]
+	RewriteRule ([a-zA-Z0-9\_\-]{1,})/$ index.php?m=$1 [NC,QSA]
+	#RewriteRule ([a-zA-Z0-9\_\-]{1,})$ index.php?m=$1 [NC,QSA]
+	RewriteRule ([a-z]{1,})-([0-9]{1,}).html$ index.php?action=$1&id=$2
+</IfModule>

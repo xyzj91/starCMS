@@ -1,0 +1,61 @@
+<?php defined('ACCESS') or exit('Access Denied');?><!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+    <style>
+		.check-hide-info:hover{ cursor: pointer;}
+		.check-hide-info{ width: 100%; float: left; height: 100%; padding-right: 15px; position: relative;}
+		.check-hide-info span{ line-height: 30px;  float: left; padding-right: 10px;}
+		.check-hide-info i{font-size: 20px; float: left; position: absolute; right: 10px; top: 5px;}
+		.table-fixed-head .table-fixed-head-thead{ z-index: 999;}
+        .table-fixed-head .table-fixed-head-thead{ z-index: 999;}
+        /* dataTables列内容居中 */
+        .table>tbody>tr>td{  text-align:center;  }
+        /* dataTables表头居中 */
+        .table>thead:first-child>tr:first-child>th{  text-align:center; }
+        /*.content{ width: 600px; margin-left: 50%; position: relative; overflow: inherit;}*/
+        /*.content-con{ width: 100%; position: relative;left: -300px;}*/
+        .content{ padding-left: 20px;font-size: 15px;}
+        .content .page-404 .error-title{font-size:20px; color:#f00}
+        .page-404{
+            color: #000;}
+        .page-404 .error-description{font-size:15px;}
+        .content ul{ text-indent: 0em;}
+
+    </style>
+
+
+</head>
+<body>
+<div class="content">
+    <div class="content-con">
+        <article class="page-404 minWP text-c">
+            <p class="error-title"><i class="Hui-iconfont va-m">~*_*~</i>
+                <span class="va-m"> <?php  echo $error_message;?></span>
+            </p>
+            错误位置:
+            <p class="error-description"><?php  echo $error_where;?> 第<?php  echo $error_line;?>行</p>
+            <p class="error-info">Trace：
+                <ul>
+                    <?php  if(is_array($error_trace)) { foreach($error_trace as $value) { ?>
+
+                    <li>File: <?php  echo $value['file'];?> (<?php  echo $value['line'];?>) <?php  echo @$value['class'];?> <?php  echo @$value['type'];?> <?php  echo $value['function'];?></li>
+
+                    <?php  } } ?>
+
+                </ul>
+            </p>
+        </article>
+    </div>
+
+</div>
+
+
+</body>
+</html>
