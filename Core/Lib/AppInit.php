@@ -77,11 +77,6 @@ class AppInit
                 //有定义的错误处理在cli模式下将不再exit,防止进程被kill
                 if(APP_DEBUG){//未定义的错误处理
                     //采用错误代码页面来展示错误
-//                    Template::assign("error_message",$e->getMessage());
-//                    Template::assign("error_where",$e->getFile());
-//                    Template::assign("error_line",$e->getLine());
-//                    Template::assign("error_trace",$e->getTrace());
-//                    Template::display("error_message.tpl");
                     $data = [
                         "error_message" => $e->getMessage(),
                         "error_where" => $e->getFile(),
