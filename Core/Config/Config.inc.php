@@ -65,5 +65,6 @@ $_Config = [
     'DEFAULT_CONFIG_NAME'   =>  "config",//自动加载的配置文件名称
     'LOG_PATH'              =>  DATA_PATH."/log/",//错误日志文件路径
     'FILE_STORAGE_PATH'     =>  DATA_PATH."/storage/",//文件存储路径
+    'DEBUG'     =>  true,//是否是debug模式
 ];
 return $_Config;

@@ -27,8 +27,8 @@ $config = require_once CORE_PATH.'/Config/Config.inc'.EXT;//加载框架配置�
 require_once LIB_PATH."/File.func".EXT;//加载全局函数
 require_once LIB_PATH."/Global.func".EXT;//加载全局函数
 autoLoadCommon(COMMON_PATH);//加载核心comm文件
-if(!defined(APP_DEBUG)){
-    define('APP_DEBUG',$config['debug']);//调试模式
+if(!defined("APP_DEBUG")){
+    define('APP_DEBUG',$config['DEBUG']);//调试模式
 }
 _LoadConfigToCommon($config);//自动定义全局配置文件
 

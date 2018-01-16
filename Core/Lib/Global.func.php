@@ -1,8 +1,35 @@
 <?php
 //全局函数，自动初始化
-use Redlib\Service\Manage\Notice;
-use Redlib\Service\Manage\UserMessage;
-use Redlib\Service\Manage\Log;
+
+
+/**
+ * 加载service类
+ * @param $class
+ * @param string $baseUrl
+ * @param string $ext
+ */
+function loadService($class, $baseUrl = '', $ext=EXT){
+    if(strpos($class,"Service/")!=false){
+        load($class,$baseUrl,$ext);
+    }else{
+        load($class,$baseUrl,$ext,"Service/");
+    }
+
+}
+
+/**
+ * 加载模型类
+ * @param $class
+ * @param string $baseUrl
+ * @param string $ext
+ */
+function loadModel($class, $baseUrl = '', $ext=EXT){
+    if(strpos($class,"Model/")!=false){
+        load($class,$baseUrl,$ext);
+    }else{
+        load($class,$baseUrl,$ext,"Model/");
+    }
+}
 /**
  * 导入所需的类库 同java的Import 本函数有缓存功能
  * @param string $class 类库命名空间字符串
@@ -27,7 +54,7 @@ function import($class, $baseUrl = '', $ext=EXT) {
             //加载公共模块的类库
             $baseUrl = COMMON_PATH;
             $class   = substr($class, 7);
-        }elseif (in_array($class_strut[0],array('Think','Org','Behavior','Com','Vendor')) || is_dir(LIB_PATH.$class_strut[0])) {
+        }elseif (in_array($class_strut[0],array('Com','Vendor',"Core")) || is_dir(LIB_PATH.$class_strut[0])) {
             // 系统类库包和第三方类库包
             $baseUrl = LIB_PATH;
         }else { // 加载其他模块的类库
@@ -51,21 +78,21 @@ function import($class, $baseUrl = '', $ext=EXT) {
  * @param string $ext 导入的文件扩展名
  * @return void
  */
-function load($name, $baseUrl='', $ext='.php') {
+function load($name, $baseUrl='', $ext='.php',$middle_path="") {
     $name = str_replace(array('.', '#'), array('/', '.'), $name);
     if (empty($baseUrl)) {
         if (0 === strpos($name, '@/')) {//加载当前模块函数库
-            $baseUrl    =   ROOT_DIR;
+            $baseUrl    =   APP_PATH;
             $name       =   substr($name, 2);
         } else { //加载其他模块函数库
             $array      =   explode('/', $name);
-            $baseUrl    =   REDLIB_PATH . array_shift($array);
+            $baseUrl    =   CORE_PATH . array_shift($array);
             $name       =   implode('/',$array);
         }
     }
     if (substr($baseUrl, -1) != '/')
         $baseUrl       .= '/';
-    require_cache($baseUrl . $name . $ext);
+    require_cache($baseUrl . $middle_path . $name . $ext);
 }
 /**
  * 优化的require_once
@@ -468,12 +495,7 @@ function loadConfig($fileName,$param=null){
 	return $param?$config[$param]:$config;
 }
 
-/**
- * 加载模块  *******现在不允许直接加载模块******
- */
-function loadModel($modelName){
-	return false;
-}
+
 /**
  * 实例化验证类 格式：[模块名/]验证器名
  * @param string $name         资源地址
