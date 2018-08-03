@@ -111,6 +111,23 @@ function require_cache($filename) {
     }
     return $_importFiles[$filename];
 }
+
+/**
+ * 通过反射创建一个类对象
+ * @param $class 类
+ * @param $param 参数
+ * @return mixed
+ */
+function instanceClass($class,$param){
+    global $instance_cache;
+    $file_name = $class;
+    //在缓存中是否存在
+    if(!isset($instance_cache[$file_name])){
+        $instance_cache[$file_name] = new ReflectionClass($class);
+    }
+    return $instance_cache[$file_name]->newInstanceArgs($param);
+}
+
 /**
  * 字符串命名风格转换
  * type 0 将Java风格转换为C的风格 1 将C风格转换为Java的风格
@@ -845,4 +862,23 @@ function dumplog()
     }catch (Exception $e){
         dumplog("errorlog","{$path}{$filename} 写入失败");
     }
+}
+
+/**
+ * 获取cli模式下传递的参数 参数传递以--开头
+ * @param $param_key
+ * @return array
+ */
+function getCliParam($param_key){
+    // config
+    $keys = is_array($param_key)?$param_key:[$param_key];
+    // argv filter
+    $longopts = [];
+
+    foreach ($keys as $key) {
+        $longopts[] = $key . ':';
+    }
+
+    $param = getopt("", $longopts);
+    return $param;
 }
