@@ -1,43 +1,56 @@
 #StarCMS介绍
+本框架采用单入口多应用的访问模式，采用mvcs的架构模式架构，一个应用只有一个入口文件，例如我们的manmage后台
+管理应用的入口文件就是Index/index.php。
+
+本框架引入数据Bean类的开发模式，在数据传输过程中采用Bean类传递，有利于多人协同开发时统一传递参数，同时也更符合OOP模式。
+
 ##1.目录结构：
     根目录
-       -comlib
-    	-Redlib
-    	    -Core
-    	        -Init.inc.php  框架入口文件 常量初始化，全局函数加载，命名空间自动注册，错误监听
-    	        -StarCMS.php   核心文件 控制路由
-    	        -Dispatcher.php 框架路由类
-    	        -Validate      自动验证类
-    	      	-Common
-    		     -Config
-    		          -Config.inc.php 全局配置文件（框架级）
-    		     -Lib
-    	                  -File.func.php 全局文件 （框架级） 文件和目录的添加删除
-    		          -Global.func.php 全局函数 （框架级）
-    		     -Class 全局类目录（框架级）自动加载
-    			Test.class.php
-        -Validate 自动验证类目录
-            -UserValidate.php  验证规则，一个模型对应一个规则类
-    
-       -manage 应用目录
-            -index.php  应用入口文件
-    	-Common   公共模块（应用级）
-    	     -Config 配置文件目录 （应用级）
-    	     -Controller 控制器（应用级）
-    	     -Lib  依赖库 （应用级）
-            -Module  模块目录
-    	    -Aaa 模块名称
-    		-TestController.php 控制器
-    
-    	-Template 应用模版目录
-    	    -Aaa 模块名称
-          		-Test 控制器名称
-    		     -index.tpl模版名称
+       -app      应用目录
+            -Common 全局应用目录
+                -Bean 数据Bean类目录
+                    -Bean.php 基础bean类
+                -Lib 全局依赖库目录（应用层）
+                    -BaseErrorCode.php 错误码基类
+                    -Controller.php 控制器基类
+                    -Param.php 参数获取基类
+                    -Response.php result基类
+                    -Template.php 模板基类
+                  
+                -Model 应用层模型
+                    -BaseModel.php 基础模型
+                --Service 应用层service
+                    -BaseService.php 基础service
+            -Index  自定义应用
+                -Common 全局目录 （应用层）
+                    BaseController.php 全局控制器
+                -Model 应用层模型        
+                --Service 应用层service
+                -Module 模块目录
+                    -Index
+                        IndexController.php
+                -Template 模板目录
+                    -Index
+                        -index.tpl
+                -index.php 应用入口
+       -Core  框架核心
+            -Common 全局目录
+            -Config 核心配置目录
+            -Lib 核心依赖库
+            -Template 核心模板目录
+            -Init.inc.php 框架初始化文件
+       -data  数据目录
+            -log 日志目录
+            -tpl 模板缓存目录
+            -config 自定义配置目录
+            -config.php 自定义配置文件
+       -vendor composer安装目录
+       
     		     
     		     
 ##2.全局函数
 
-按照當前URL模式生成完整URL鏈接 modulue不設置默認為當前模塊名,controller不設置默認為當前控制器
+按照当前URL模式生成完整URL鏈接 modulue不設置默認為當前模塊名,controller不設置默認為當前控制器
 
     URL(['path'=>'modulue/controller/action','param1'=>xxxx,'param2'=>xxxx])
     
